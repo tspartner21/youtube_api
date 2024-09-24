@@ -1,18 +1,13 @@
-/*
-  QueryString : 기본 요청 URL뒤에 문자열형태로 옵션값을 달아서 서버에 요청하는 형태
-  https://www.abc.com?pwd=1234&name=abc;
-  www.abc.com //기본 요청 URL
-  ?뒤에 있는 key=value값 문자열 형태로 지정한 추가 요청사항 
-  요청사항이 여러개일때에는 &로 구분
-*/
-
 const api_key = "AIzaSyDfF904vE_uzyNlnhKgAyUmNWV9U5vTxZ0";
-const pid = "PLHtvRFLN5v-WSMMckC0kyUPBzYhXVREHD";
+const pid = "PLHtvRFLN5v-W5bQjvyH8QTdQQhgflJ3nu";
+const num = 10;
 
-const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${pid}&key=${api_key}`;
+const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${pid}&key=${api_key}&maxResults=${num}`;
 
 fetch(url)
-  .then((data) => data.json())
+  .then((data) => data.json()) //문자열의 데이터를 객체나 배열형태로 변환 (parsing)
   .then((json) => {
+    //parsing완료된 데이터를 json 파라미터명으로 받아서
+    //해당 코드블록안쪽에서 데이터 활용
     console.log(json);
   });
