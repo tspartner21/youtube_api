@@ -9,3 +9,9 @@
 
 console.log("youtube");
 const api_key = "AIzaSyDfF904vE_uzyNlnhKgAyUmNWV9U5vTxZ0";
+
+fetch("/data.json")
+  .then((data) => data.json())
+  .then((json) => {
+    console.log(json);
+  });
