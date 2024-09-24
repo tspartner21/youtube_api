@@ -25,10 +25,10 @@ fetch(url)
           : data.snippet.description;
 
       let date = data.snippet.publishedAt.split("T")[0].split("-").join(".");
-
+      //h2요소에 data-id라는 커스텀 속성을 만들어서 유튜브 영상 id값 숨겨놓음 
       tags += `
         <article>
-          <h2 class='vidTitle'>${title}</h2>         
+          <h2 class='vidTitle' data-id=${data.snippet.resourceId.videoId}>${title}</h2>         
           
           <div class='txt'>
             <p>${desc}</p>
@@ -77,7 +77,14 @@ fetch(url)
     //console.log(e.target);
     //body 전체에 이벤트를 연결한 뒤 이벤트 발생한 실제대상을 조건문으로 분기처리해서
     //조건에 부합될 때에만 원하는 구문 연결(이처럼 번거로운 작업을 처리하지 않기 위해서 리액트 같은 프레임워크, 라이버러리 사용)
-      if(e.target.className === "vidTitle"){ //이벤트 타겟은 이벤트 걸린 대상
+
+    //클릭한 대상인 h2요소에 data-id속성으로 숨겨놓은 유튜브 영상 id값을 변수에 옮겨담고
+    //동적으로 생성되는 iframe요소의 src값에 연동
+
+        const vidID = e.target.getAttribute("data-id"); //data-id 속성값 가져오기
+
+        //이벤트 위임 : 이벤트를 부모에 걸어놓고 자식에게 전파시키는 방식
+        if(e.target.className === "vidTitle"){ //이벤트 타겟은 이벤트 걸린 대상
         console.log("you clicked VidTitle");
         //동적으로 aside 모달창 생성
         //해당 모달창을 절대 innerHTML로 생성 불가
@@ -94,9 +101,21 @@ fetch(url)
 
         ///aside라는 비어있는 엘리먼트 요소 안쪽에 기존처럼 innerHTML 원하는 요소 동적 생성
         //aside 안쪽에 복잡한 자식요소는 덮어써도 상관없기에 생성. 기존처럼 innerHTML 원하는 요소 동적 생성
-        asideEl.innerHTML = `<div class='con'></div><button>close</button>`;
+        asideEl.innerHTML = `<div class='con'>
+        <iframe src="http://www.youtube.com/embed/${vidID}" frameborder="0"></iframe>
+        </div><button class='btnClose'>close</button>`;
 
         //append로 기존 요소 유지하면서 aside요소 추가 (인수로는 문자가 아닌 엘리먼트 노드 필요)
         document.body.append(asideEl);
       }
+    });
+
+    //동적으로 생성된 모달 닫기 버튼에 이벤트 위임
+    document.body.addEventListener("click", e => {
+      if(e.target.className === 'btnClose'){
+        //display:none과는 다르게 물리적으로 DOM자체를 제거
+        document.querySelector("aside").remove();
+        
+      }
+
     });
