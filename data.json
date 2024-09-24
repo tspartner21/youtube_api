@@ -1,7 +1,7 @@
 {
-  "member": [
-    { "name": "David", "position": "CEO" },
-    { "name": "Emily", "position": "DESIGNER" },
-    { "name": "Michael", "position": "DEVELOPER" }
-  ]
+    "member" : [
+        {"name" : "John" , "age"  : 25 , "city" : "New york"},
+        {"name" : "Jack", "age" : 30 , "city" : "Seoul"},       
+        {"name" : "Jane" , "age" : 45 , "city" : "Tokyo"}
+    ]
 }
