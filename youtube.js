@@ -10,4 +10,10 @@ fetch(url)
     //parsing완료된 데이터를 json 파라미터명으로 받아서
     //해당 코드블록안쪽에서 데이터 활용
     console.log(json);
+    //자주쓰는 데이터값
+    //title: 영상의 제목
+    //description : 영상의 본문
+    //publishedAt : 영상 업로드 날짜
+    //thumbnails.standard.url : 썸네일주소
+    //resourceId.videoId: 추후 영상호출시 필요한 정보값
   });
